@@ -26,12 +26,12 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') &&
 
     // Check if the number of copies is numeric/integere
     $PRICE_SPEC = array (
-        '1'   => 1600,
-        '3'   => 1525,
-        '5'   => 1475,
-        '10'  => 1400,
-        '25'  => 1325,
-        '50'  => 1250
+        '1'   => 1700,
+        '3'   => 1625,
+        '5'   => 1575,
+        '10'  => 1500,
+        '25'  => 1425,
+        '50'  => 1350
     );
 
     $pp_copy = $PRICE_SPEC ['1'];

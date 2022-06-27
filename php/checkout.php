@@ -5,6 +5,7 @@ session_start();
 
 $sender = parse_url($_SERVER['HTTP_REFERER'])['host'];
 
+$postage_pickup     = 0;
 $postage_goa        = 60;
 $postage_india      = 120;
 $postage_anywhere   = 1600;
@@ -21,6 +22,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') &&
     $state      = $_POST ['state'];
     $country    = $_POST ['country'];
     $zip        = $_POST ['zip'];
+    $pickup     = $_POST ['pickup'];
 
     $copies     = (int) $_POST ['copies'];
 
@@ -45,11 +47,16 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') &&
         }
     }
 
-    $postage = $postage_anywhere;
-    if ($country == 'India') {
-        $postage = ($state == 'Goa') ? $postage_goa : $postage_india;
+    if ($pickup == 1) {
+	$postage = $postage_pickup;
     }
-    $postage = $copies * $postage;
+    else {
+	$postage = $postage_anywhere;
+	if ($country == 'India') {
+            $postage = ($state == 'Goa') ? $postage_goa : $postage_india;
+	}
+	$postage = $copies * $postage;
+    }
 
     $total_charge = number_format((float)($price + $postage), 2, '.', '');
 
